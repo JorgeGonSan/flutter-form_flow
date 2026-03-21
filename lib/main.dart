@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:formflow/widgets/my_text_field.dart';
 
 void main() {
   runApp(const MyFormFlow());
@@ -12,6 +13,10 @@ class MyFormFlow extends StatefulWidget {
 }
 
 class _MyFormFlowState extends State<MyFormFlow> {
+  TextEditingController nombreController = TextEditingController();
+  TextEditingController edadController = TextEditingController();
+  TextEditingController mailController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -20,7 +25,36 @@ class _MyFormFlowState extends State<MyFormFlow> {
           title: Text("Form Flow"),
           backgroundColor: Colors.grey[300],
         ),
-        body: Center(child: Column(children: [])),
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                //Nombre
+                MyTextField(
+                  myLabel: "Nombre",
+                  myController: nombreController,
+                  myHintText: "Tu nombre",
+                  myKeyboardType: TextInputType.text,
+                ),
+                //Edad
+                MyTextField(
+                  myLabel: "Edad",
+                  myController: edadController,
+                  myHintText: "Tu edad",
+                  myKeyboardType: TextInputType.number,
+                ),
+                //Mail
+                MyTextField(
+                  myLabel: "Mail",
+                  myController: mailController,
+                  myHintText: "Tu mail",
+                  myKeyboardType: TextInputType.emailAddress,
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
