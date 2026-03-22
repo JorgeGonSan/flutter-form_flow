@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:formflow/models/usuario.dart';
+import 'package:formflow/screens/usuarios_screen.dart';
 import 'package:formflow/widgets/my_text_field.dart';
 
 void main() {
@@ -75,66 +76,84 @@ class _MyFormFlowState extends State<MyFormFlow> {
         body: Center(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                //Nombre
-                Text(nombreError),
-                MyTextField(
-                  myLabel: "Nombre",
-                  myController: nombreController,
-                  myHintText: "Tu nombre",
-                  myKeyboardType: TextInputType.text,
-                ),
+            child: Builder(
+              builder: (context) {
+                return Column(
+                  children: [
+                    //Nombre
+                    Text(nombreError),
+                    MyTextField(
+                      myLabel: "Nombre",
+                      myController: nombreController,
+                      myHintText: "Tu nombre",
+                      myKeyboardType: TextInputType.text,
+                    ),
 
-                //Edad
-                Text(edadError),
-                MyTextField(
-                  myLabel: "Edad",
-                  myController: edadController,
-                  myHintText: "Tu edad",
-                  myKeyboardType: TextInputType.number,
-                ),
-                //Mail
-                Text(mailError),
-                MyTextField(
-                  myLabel: "Mail",
-                  myController: mailController,
-                  myHintText: "Tu mail",
-                  myKeyboardType: TextInputType.emailAddress,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      nombreController.text;
-                      setState(() {
-                        //validar nombre
-                        nombreError = validarNombre(nombreController.text);
-                        //validar edad
-                        edadError = validarEdad(edadController.text);
-                        //validar mail
-                        mailError = validarMail(mailController.text);
-                        //limpiar campos
-                        if (nombreError.isEmpty &&
-                            edadError.isEmpty &&
-                            mailError.isEmpty) {
-                          usuarios.add(
-                            Usuario(
-                              nombre: nombreController.text,
-                              edad: int.parse(edadController.text),
-                              mail: mailController.text,
-                            ),
-                          );
-                          nombreController.clear();
-                          edadController.clear();
-                          mailController.clear();
-                        }
-                      });
-                    },
-                    child: Text("Enviar"),
-                  ),
-                ),
-              ],
+                    //Edad
+                    Text(edadError),
+                    MyTextField(
+                      myLabel: "Edad",
+                      myController: edadController,
+                      myHintText: "Tu edad",
+                      myKeyboardType: TextInputType.number,
+                    ),
+                    //Mail
+                    Text(mailError),
+                    MyTextField(
+                      myLabel: "Mail",
+                      myController: mailController,
+                      myHintText: "Tu mail",
+                      myKeyboardType: TextInputType.emailAddress,
+                    ),
+
+                    Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          nombreController.text;
+                          setState(() {
+                            //validar nombre
+                            nombreError = validarNombre(nombreController.text);
+                            //validar edad
+                            edadError = validarEdad(edadController.text);
+                            //validar mail
+                            mailError = validarMail(mailController.text);
+                            //limpiar campos
+                            if (nombreError.isEmpty &&
+                                edadError.isEmpty &&
+                                mailError.isEmpty) {
+                              usuarios.add(
+                                Usuario(
+                                  nombre: nombreController.text,
+                                  edad: int.parse(edadController.text),
+                                  mail: mailController.text,
+                                ),
+                              );
+                              nombreController.clear();
+                              edadController.clear();
+                              mailController.clear();
+                            }
+                          });
+                        },
+                        child: Text("Guardar"),
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (BuildContext context) {
+                              return UsuariosScreen(usuarios: usuarios);
+                            },
+                          ),
+                        );
+                      },
+                      child: Text("Visualizar datos"),
+                    ),
+                  ],
+                );
+              },
             ),
           ),
         ),
