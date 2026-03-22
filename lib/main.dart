@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:formflow/models/usuario.dart';
 import 'package:formflow/widgets/my_text_field.dart';
 
 void main() {
@@ -20,6 +21,8 @@ class _MyFormFlowState extends State<MyFormFlow> {
   String nombreError = "";
   String edadError = "";
   String mailError = "";
+
+  List<Usuario> usuarios = [];
   //validar Nombre
   String validarNombre(String nombreText) {
     if (nombreText.isEmpty) {
@@ -115,12 +118,16 @@ class _MyFormFlowState extends State<MyFormFlow> {
                         if (nombreError.isEmpty &&
                             edadError.isEmpty &&
                             mailError.isEmpty) {
+                          usuarios.add(
+                            Usuario(
+                              nombre: nombreController.text,
+                              edad: int.parse(edadController.text),
+                              mail: mailController.text,
+                            ),
+                          );
                           nombreController.clear();
-                          print("nombre ok");
                           edadController.clear();
-                          print("edad ok");
                           mailController.clear();
-                          print("mail ok");
                         }
                       });
                     },
