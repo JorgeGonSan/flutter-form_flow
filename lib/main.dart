@@ -20,6 +20,46 @@ class _MyFormFlowState extends State<MyFormFlow> {
   String nombreError = "";
   String edadError = "";
   String mailError = "";
+  //validar Nombre
+  String validarNombre(String nombreText) {
+    if (nombreText.isEmpty) {
+      nombreError = "no puede estar vacio";
+    } else {
+      nombreError = "";
+    }
+    return nombreError;
+  }
+
+  //Validar Edad
+  String validarEdad(String edadText) {
+    if (edadText.isEmpty) {
+      edadError = "La edad no puede estar vacia";
+    } else {
+      try {
+        int edad = int.parse(edadText);
+        if (edad < 1 || edad > 120) {
+          edadError = "Esa edad no es posible";
+        } else {
+          edadError = "";
+        }
+      } catch (e) {
+        edadError = "Introduce una edad valida";
+      }
+    }
+    return edadError;
+  }
+
+  //Validar Mail
+  String validarMail(String mailText) {
+    if (mailText.isEmpty) {
+      mailError = "El mail no puede esta vacio";
+    } else if (!(mailText.contains("@") && mailText.contains("."))) {
+      mailError = "Formato de mail invalido";
+    } else {
+      mailError = "";
+    }
+    return mailError;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,35 +106,11 @@ class _MyFormFlowState extends State<MyFormFlow> {
                       nombreController.text;
                       setState(() {
                         //validar nombre
-                        if (nombreController.text.isEmpty) {
-                          nombreError = "no puede estar vacio";
-                        } else {
-                          nombreError = "";
-                        }
+                        nombreError = validarNombre(nombreController.text);
                         //validar edad
-                        if (edadController.text.isEmpty) {
-                          edadError = "La edad no puede estar vacia";
-                        } else {
-                          try {
-                            int edad = int.parse(edadController.text);
-                            if (edad < 1 || edad > 120) {
-                              edadError = "Esa edad no es posible";
-                            } else {
-                              edadError = "";
-                            }
-                          } catch (e) {
-                            edadError = "Introduce una edad valida";
-                          }
-                        }
+                        edadError = validarEdad(edadController.text);
                         //validar mail
-                        if (mailController.text.isEmpty) {
-                          mailError = "El mail no puede esta vacio";
-                        } else if (!(mailController.text.contains("@") &&
-                            mailController.text.contains("."))) {
-                          mailError = "Formato de mail invalido";
-                        } else {
-                          mailError = "";
-                        }
+                        mailError = validarMail(mailController.text);
                         //limpiar campos
                         if (nombreError.isEmpty &&
                             edadError.isEmpty &&
