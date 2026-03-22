@@ -1,17 +1,30 @@
 # formflow
 
-A new Flutter project.
+## Descripción
 
-## Getting Started
+FormFlow es una aplicación de ejemplo creada en Flutter para aprender y demostrar conceptos clave de desarrollo de apps móviles, enfocándose en validación de formularios, manejo de listas dinámicas y navegación entre pantallas.
 
-This project is a starting point for a Flutter application.
+## Características
 
-A few resources to get you started if this is your first Flutter project:
+- Formulario con validación de campos (nombre, edad y mail)
+- Guardado de usuarios en una lista dinámica
+- Pantalla de usuarios mostrando Cards con nombre, edad, mail y avatar
+- Navegación entre pantallas
+- Uso de widgets reutilizables (MyTextField)
+- Interfaz sencilla y clara para demostrar jerarquía de widgets
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+## Capturas
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Formulario con errores](assets/principal_errores.PNG)
+![Formulario correcto](assets/principal_completa.PNG)
+![Visualización de usuarios](assets/pantalla_datos.PNG)
+
+## Conceptos aprendidos
+
+- StatefulWidget y setState
+- ListView.builder y manejo de listas dinámicas
+- Widgets interactivos: ElevatedButton, IconButton, CircleAvatar
+- Navegación entre pantallas y paso de datos
+- Validación de datos y manejo de errores
+- Widgets reutilizables
+- Jerarquía visual: Column, Row, Padding, SizedBox
