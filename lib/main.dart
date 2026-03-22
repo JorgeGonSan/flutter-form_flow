@@ -17,6 +17,10 @@ class _MyFormFlowState extends State<MyFormFlow> {
   TextEditingController edadController = TextEditingController();
   TextEditingController mailController = TextEditingController();
 
+  String nombreError = "";
+  String edadError = "";
+  String mailError = "";
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -31,13 +35,16 @@ class _MyFormFlowState extends State<MyFormFlow> {
             child: Column(
               children: [
                 //Nombre
+                Text(nombreError),
                 MyTextField(
                   myLabel: "Nombre",
                   myController: nombreController,
                   myHintText: "Tu nombre",
                   myKeyboardType: TextInputType.text,
                 ),
+
                 //Edad
+                Text(edadError),
                 MyTextField(
                   myLabel: "Edad",
                   myController: edadController,
@@ -45,11 +52,64 @@ class _MyFormFlowState extends State<MyFormFlow> {
                   myKeyboardType: TextInputType.number,
                 ),
                 //Mail
+                Text(mailError),
                 MyTextField(
                   myLabel: "Mail",
                   myController: mailController,
                   myHintText: "Tu mail",
                   myKeyboardType: TextInputType.emailAddress,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      nombreController.text;
+                      setState(() {
+                        //validar nombre
+                        if (nombreController.text.isEmpty) {
+                          nombreError = "no puede estar vacio";
+                        } else {
+                          nombreError = "";
+                        }
+                        //validar edad
+                        if (edadController.text.isEmpty) {
+                          edadError = "La edad no puede estar vacia";
+                        } else {
+                          try {
+                            int edad = int.parse(edadController.text);
+                            if (edad < 1 || edad > 120) {
+                              edadError = "Esa edad no es posible";
+                            } else {
+                              edadError = "";
+                            }
+                          } catch (e) {
+                            edadError = "Introduce una edad valida";
+                          }
+                        }
+                        //validar mail
+                        if (mailController.text.isEmpty) {
+                          mailError = "El mail no puede esta vacio";
+                        } else if (!(mailController.text.contains("@") &&
+                            mailController.text.contains("."))) {
+                          mailError = "Formato de mail invalido";
+                        } else {
+                          mailError = "";
+                        }
+                        //limpiar campos
+                        if (nombreError.isEmpty &&
+                            edadError.isEmpty &&
+                            mailError.isEmpty) {
+                          nombreController.clear();
+                          print("nombre ok");
+                          edadController.clear();
+                          print("edad ok");
+                          mailController.clear();
+                          print("mail ok");
+                        }
+                      });
+                    },
+                    child: Text("Enviar"),
+                  ),
                 ),
               ],
             ),

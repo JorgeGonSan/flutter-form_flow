@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class MyTextField extends StatelessWidget {
-  String myLabel;
-  TextEditingController myController;
-  TextInputType myKeyboardType;
-  String myHintText;
+  final String myLabel;
+  final TextEditingController myController;
+  final TextInputType myKeyboardType;
+  final String myHintText;
 
-  MyTextField({
+  const MyTextField({
     super.key,
     required this.myLabel,
     required this.myController,
@@ -35,6 +35,7 @@ class MyTextField extends StatelessWidget {
           ),
         ),
       ),
+      
     );
   }
 }
